@@ -4,11 +4,11 @@
     <a class="navbar-brand" href="{{ url_for('index.index') }}">
       <img src="{{ url_for('static', filename='img/navbar_logo.svg') }}" alt="ListenBrainz" />
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     {#- Collect the nav links, forms, and other content for toggling -#}
-    <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+    <div class="collapse navbar-collapse" id="navbarToggle">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if not hide_navbar_user_menu %}
         {% if current_user.is_authenticated %}
@@ -30,10 +30,10 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          <a class="nav-link dropdown-toggle" id="dataDropdown" role="button" data-bs-toggle="dropdown" href="#" aria-expanded="false">
             Data<span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" aria-labelledby="dataDropdown">
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index.add_data_info') }}">
                 Adding data
@@ -52,10 +52,10 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          <a class="nav-link dropdown-toggle" id="exploreDropdown" role="button" data-bs-toggle="dropdown" href="#" aria-expanded="false">
             Explore<span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" aria-labelledby="exploreDropdown">
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index.huesound') }}">
                 Hue Sound
@@ -74,10 +74,10 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          <a class="nav-link dropdown-toggle" id="aboutDropdown" role="button" data-bs-toggle="dropdown" href="#" aria-expanded="false">
             About<span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index.about') }}">
                 About ListenBrainz
@@ -115,22 +115,22 @@
       <form class="d-flex" role="search" method="GET" action="/search">
         <input type="text" name="search_term" class="form-control me-2" placeholder="Search Listener" required/>
         <button type="submit" class="btn btn-primary input-sm">
-          <span class="glyphicon glyphicon-search"></span>
+          <i class="fas fa-search"></i>
         </button>
       </form>
 
       {% if not hide_navbar_user_menu %}
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         {% if not current_user.is_authenticated or current_user.is_anonymous %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('login.index') }}">Sign in</a>
         </li>
         {% else %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          <a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" href="#" aria-expanded="false">
             {{ current_user.musicbrainz_id }} <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" aria-labelledby="profileDropdown">
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('profile.info') }}">
                 Settings
